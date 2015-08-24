@@ -1,0 +1,76 @@
+apply plugin: 'idea'
+
+// configure to download sources for IntelliJ
+idea {
+    project {
+        languageLevel = '1.8'
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+buildscript {
+    repositories {
+        maven { url 'http://repo.spring.io/plugins-snapshot' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+    }
+}
+
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'scala'
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'jacoco'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        //mavenLocal()
+        maven { url 'http://repo.springsource.org/milestone/' }
+        maven { url 'http://repo.spring.io/milestone/' }
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        compile('org.scala-lang:scala-library:2.11.2')
+    }
+}
+
+project(':scala-spring-application-example-server') {
+
+    apply plugin: 'idea'
+    apply plugin: 'spring-boot'
+
+    version = "0.0.1"
+    mainClassName = "com.organization.example.SpringApplicationExample"
+    applicationName = "scala-spring-application-example"
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+        compile "org.springframework.scala:spring-scala_2.10:1.0.0.RC1"
+    }
+
+    springBoot {
+        mainClass = "com.organization.example.SpringApplicationExample"
+    }
+}

@@ -1,0 +1,19 @@
+# intellij metadata
+.idea
+*.ipr
+*.iml
+*.iws
+*.ids
+
+.project
+.classpath
+.gradle/
+.settings/
+bin
+
+build
+target
+logs
+out
+
+.sonar

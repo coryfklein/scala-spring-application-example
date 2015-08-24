@@ -1,0 +1,2 @@
+rootProject.name='scala-spring-application-example'
+include 'scala-spring-application-example-server'
